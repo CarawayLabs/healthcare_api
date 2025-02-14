@@ -1,0 +1,183 @@
+{
+    "info": {
+      "_postman_id": "3d4c8b6b-4be8-4f15-a726-111111111111",
+      "name": "Healthcare API Collection",
+      "description": "A Postman Collection for interacting with the Healthcare API deployed on Digital Ocean.\n\nBase URL: https://healthcare-api-qo4ms.ondigitalocean.app/\n\nEach request includes a description and example body/parameters.\n\nFeel free to modify 'some-uuid' in the requests to a real UUID from the 'Create Patient' response, or any valid UUID stored in your CSV.",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Authenticate Patient (POST)",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"dob\": \"1980-01-01\"\n}"
+          },
+          "url": {
+            "raw": "https://healthcare-api-qo4ms.ondigitalocean.app/authenticate/patient",
+            "protocol": "https",
+            "host": [
+              "healthcare-api-qo4ms",
+              "ondigitalocean",
+              "app"
+            ],
+            "path": [
+              "authenticate",
+              "patient"
+            ]
+          },
+          "description": "Authenticates a patient using their first_name, last_name, and date of birth.\nCurrently, it always returns { \"authenticated\": true }."
+        },
+        "response": []
+      },
+      {
+        "name": "Create Patient (POST)",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"first_name\": \"Alice\",\n    \"last_name\": \"Smith\",\n    \"dob\": \"1990-05-15\",\n    \"phone_number\": \"123-456-7890\"\n}"
+          },
+          "url": {
+            "raw": "https://healthcare-api-qo4ms.ondigitalocean.app/patient",
+            "protocol": "https",
+            "host": [
+              "healthcare-api-qo4ms",
+              "ondigitalocean",
+              "app"
+            ],
+            "path": [
+              "patient"
+            ]
+          },
+          "description": "Creates a new patient record. Returns a JSON object with the generated patient_id, e.g. { \"patient_id\": \"<uuid>\" }."
+        },
+        "response": []
+      },
+      {
+        "name": "Get Patient by ID (GET)",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "https://healthcare-api-qo4ms.ondigitalocean.app/patient?patient_id=some-uuid",
+            "protocol": "https",
+            "host": [
+              "healthcare-api-qo4ms",
+              "ondigitalocean",
+              "app"
+            ],
+            "path": [
+              "patient"
+            ],
+            "query": [
+              {
+                "key": "patient_id",
+                "value": "some-uuid"
+              }
+            ]
+          },
+          "description": "Retrieves a patient record by patient_id. Replace 'some-uuid' with a real UUID from the CSV or from the Create Patient response.\nReturns a 404 error if the patient does not exist."
+        },
+        "response": []
+      },
+      {
+        "name": "Get All Patients (GET)",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "https://healthcare-api-qo4ms.ondigitalocean.app/patients",
+            "protocol": "https",
+            "host": [
+              "healthcare-api-qo4ms",
+              "ondigitalocean",
+              "app"
+            ],
+            "path": [
+              "patients"
+            ]
+          },
+          "description": "Returns a list of all patients in the CSV file."
+        },
+        "response": []
+      },
+      {
+        "name": "Update Patient (PUT)",
+        "request": {
+          "method": "PUT",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"first_name\": \"Alice\",\n    \"last_name\": \"Johnson\",\n    \"dob\": \"1990-05-15\",\n    \"phone_number\": \"555-999-1234\"\n}"
+          },
+          "url": {
+            "raw": "https://healthcare-api-qo4ms.ondigitalocean.app/patient?patient_id=some-uuid",
+            "protocol": "https",
+            "host": [
+              "healthcare-api-qo4ms",
+              "ondigitalocean",
+              "app"
+            ],
+            "path": [
+              "patient"
+            ],
+            "query": [
+              {
+                "key": "patient_id",
+                "value": "some-uuid"
+              }
+            ]
+          },
+          "description": "Updates a patient record by patient_id. Replace 'some-uuid' with a valid UUID.\nIf not found, returns a 404 error."
+        },
+        "response": []
+      },
+      {
+        "name": "Delete Patient (DELETE)",
+        "request": {
+          "method": "DELETE",
+          "header": [],
+          "url": {
+            "raw": "https://healthcare-api-qo4ms.ondigitalocean.app/patient?patient_id=some-uuid",
+            "protocol": "https",
+            "host": [
+              "healthcare-api-qo4ms",
+              "ondigitalocean",
+              "app"
+            ],
+            "path": [
+              "patient"
+            ],
+            "query": [
+              {
+                "key": "patient_id",
+                "value": "some-uuid"
+              }
+            ]
+          },
+          "description": "Deletes a patient record by patient_id. Replace 'some-uuid' with a valid UUID.\nReturns a 404 error if the patient does not exist."
+        },
+        "response": []
+      }
+    ]
+  }
+  
